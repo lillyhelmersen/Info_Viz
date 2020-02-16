@@ -7,6 +7,12 @@ canvas {
   display: block;
   cursor:all-scroll;
 }
+.picture{
+  position: absolute;
+      right: 0px;
+      bottom: 20px;
+    z-index: 9;
+}
 .arowButton{
   position: absolute;
       right: 35%;

@@ -38,10 +38,12 @@ var maxRow;
 var theTime = "To day";
 
 var numberOfIds = 12;
+var img;
 
 function preload(){
   //table = loadTable(dataCS, 'csv', 'header');
   tableIN = loadTable(data, 'csv', 'header');
+  img = loadImage('speeds.PNG');
 }
 
 function setup() {
@@ -54,6 +56,9 @@ function setup() {
   setRadioButtons();
   setArowBottons();
   setText(theTime);
+  //image(img, 0, 0, width/20, height-height/20);
+
+
 
   //filterDataCD(table);
 
