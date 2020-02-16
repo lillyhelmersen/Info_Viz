@@ -1,0 +1,44 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+canvas {
+  display: block;
+  cursor:all-scroll;
+}
+.arowButton{
+  position: absolute;
+      right: 35%;
+      bottom: 0px;
+  z-index: 9;
+  width: 20%;
+  height: 10%;
+
+/*
+  border-style: solid;
+  border-width: 1px;
+  border-color: white;
+*/
+}
+
+.radioButtons{
+ /*position:absolute;
+ //top:10;
+ float: left;
+ position:relative;
+ border-style: solid;
+ border-width: 1px;
+ //right:15;*/
+ position: absolute;
+     left: 5px;
+     bottom: 30px;
+
+
+  width: 20%;
+ z-index: 10;
+}
+
+.leaflet-control-zoom {
+
+      }
