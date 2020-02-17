@@ -398,20 +398,20 @@ function lineStyle(i){
   var h = timeToNextMsINTab[i]/(60*60*1000);
   var km_h = distansINTab[i]/h;
   //console.log("km/t: " + km_h);
-  if(km_h == 0){
-    stroke(255);
-  } else if(km_h > 200){
+  if(h == 0){
     stroke('#FF0900');
-  }  else if(km_h > 80){
+  } else if(km_h > 200){
     stroke('#FF6900');
-  } else if(km_h > 25){
+  }  else if(km_h > 80){
     stroke('#FEE300');
+  } else if(km_h > 25){
+    stroke('#cfff77');
   } else if(km_h > 5){
-    stroke('#C4FF57');
-  }  else if(km_h > 0){
     stroke('#0BFF01');
-  } else {
+  }  else if(km_h > 0){
     stroke('#00FFF3');
+  } else {
+    stroke('#0000ff');
   }
 
 }
