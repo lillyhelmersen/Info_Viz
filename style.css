@@ -1,11 +1,46 @@
 html, body {
   margin: 0;
   padding: 0;
+  background-color: #101114;
+  text-align: center;
+}
+p,h1{
+  color: #1c3c5e;
+  font-family: 'Arial';
+}
+p{
+  font-size: 16px;
 }
 
 canvas {
   display: block;
   cursor:all-scroll;
+}
+#mapLink a{
+  text-decoration: none;
+  background-color: #1c3c5e;
+  border-radius: 10px;
+  padding: 15px;
+}
+#mapLink a:visited {
+  color: #101114;
+}
+#mapLink{
+  font-family: 'Arial';
+  font-variant: small-caps;
+  font-weight: bold;
+  font-size: 18px;
+  color: #101114;
+  text-align: center;
+  margin: 100px auto ;
+}
+
+.text{
+  width: 60%;
+  display: block;
+  margin: auto;
+  text-align: justify;
+
 }
 .picture{
   position: absolute;

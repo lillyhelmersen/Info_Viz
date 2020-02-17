@@ -1,17 +1,27 @@
 <!DOCTYPE html><html><head>
-    <script src="p5.min.js"></script>
-    <script src="p5.dom.min.js"></script>
-    <script src="mappa.js" type="text/javascript"></script>
 
   	<link rel="stylesheet" type="text/css" href="style.css">
     <meta charset="utf-8">
 
   </head>
   <body>
-    <div id="radios" class="radioButtons"></div>
-    <div id="arowButton" class="arowButton"></div>
-    <div id="picture" class="picture"><img src="speeds.PNG" alt="Speed" style="width:150px;height:300px;"></div>
-    <script src="sketch5_2.js"></script>
+    <h1> Bias in Carnivorus plants </h1>
+    <div id="text" class="text"><p> <b>Project description:</b><br>
+      The project demonstrates the possible bias in distribution data of carnivorous plants generated from social media. The data is contributed by user uploaded photos with geographical information and biological tags. Yet there are strong biases that may result from different perpectives: people may only take pictures around places they live, travel to or can get relatively easy access to; or people tend to upload photos in a concentrated period of time after they took them which led to inaccurate geographical coordinates.<br><br>
+
+      We mark the credibility of data by calculating the travel speed before the photo was taken from last record. The travelling speeds are sorted into 7 segments(unit in km/h): 0, <5, <25, <80, <200, >200 and with a Δt=0. Generally, the faster the speed the more suspective the data could be, not to mention a zero interval time.
+      <br><br><br>
+      <b>Implications of data bias:</b><br>
+      The inaccuracy of distribution data will result in multiple consequences. First, geography tags that manually added afterwards may cause significant drift away from the real spot. Second the data has strong bias towards places where there’s rich human activity and neglects uninhabited areas, which cannot cover the overall distribution. Third, the data are not consistently contributed by users’ observation, they may occationally took the photos, indicating that the distribution area shift over the years may not represent the reality.
+      <br><br><br>
+      <b>How to read:</b><br>
+      Please choose one user ID first, and then you can check the tavel pattern from previous days and latter days.<br>
+      The travelling speeds are calculated and marked in different colors following a spectrum of visible light. The faster the warmer lines are filled, and in contrast the slower the colder.<br>
+      </p>
+      <div id="mapLink">
+        <a href="map.html">see the map</a>
+      </div>
+    </div>
     <!--script src="sketch5.js"></script-->
 
 
