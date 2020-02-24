@@ -29,7 +29,7 @@ var ids = [];
 
 var inSheet = 0;
 var forRedraw = 0;
-var latSelected = 0;
+var latSelected = 1;
 var one_day=1000*60*60*24;
 
 var tableIN;
@@ -70,14 +70,15 @@ function draw() {
 //-------setup----------
 function setRadioButtons(){
   console.log("Trying to make radio butons");
-  radio = createRadio('radios');
-  radio.style('color', '#ffffff');
+  radio = createSelect('radios');
+  radio.style('color', '#000000');
   for (i = 0; i < numberOfIds; ++i){
     var j = i+1;
     var id = ids[i];
     var tempName = '' + j + '. User: ' + id + '';
     var butName = tempName;
     radio.option(butName, j);
+    radio.changed(nextTrip);
   }
 
   //radio.option('white');
@@ -350,6 +351,7 @@ function  drawLine(x1,y1,x2,y2,i){
   line(x1,y1,x2,y2);
   noFill();
   noStroke();
+  strokeWeight(0);
 }
 
 //---------------------MAth shit for curws---------------------
@@ -398,6 +400,9 @@ function lineStyle(i){
   var h = timeToNextMsINTab[i]/(60*60*1000);
   var km_h = distansINTab[i]/h;
   //console.log("km/t: " + km_h);
+
+  strokeWeight(2.5);
+
   if(h == 0){
     stroke('#FF0900');
   } else if(km_h > 200){
@@ -406,13 +411,14 @@ function lineStyle(i){
     stroke('#FEE300');
   } else if(km_h > 25){
     stroke('#cfff77');
+    stroke('#00FFF3');
   } else if(km_h > 5){
     stroke('#0BFF01');
   }  else if(km_h > 0){
-    stroke('#00FFF3');
   } else {
     stroke('#0000ff');
   }
+
 
 }
 
