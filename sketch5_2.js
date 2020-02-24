@@ -40,6 +40,8 @@ var theTime = "To day";
 var numberOfIds = 12;
 var img;
 
+var radius = windowHeight/50;
+
 function preload(){
   //table = loadTable(dataCS, 'csv', 'header');
   tableIN = loadTable(data, 'csv', 'header');
@@ -247,6 +249,7 @@ function drawMarks(startIndex){
 
     drawPoint(x1,y1);
     drawLine(x1,y1,x2,y2,i);
+    //drawArrow(x1,y1,x2,y2);
     //difference_ms;//.round(difference_ms/one_day);
     if(ifNextTrip(timeToNextMsINTab[i])){
       bool = false;
@@ -338,10 +341,10 @@ function noSelection(){
 
 function  drawPoint(x,y){
   var zoom = myMap.zoom();
-  r = windowHeight/50;//!!!!!!!!!!!!!!SOMTHING WITH ZOOL
+  radius = windowHeight/50;//!!!!!!!!!!!!!!SOMTHING WITH ZOOL
   //r = (zoom+1)*20-(zoom+1)*50;
   pointStyle();
-  ellipse(x,y,r,r);
+  ellipse(x,y,radius,radius);
   noFill();
   noStroke();
 }
@@ -352,6 +355,18 @@ function  drawLine(x1,y1,x2,y2,i){
   noFill();
   noStroke();
   strokeWeight(0);
+}
+function  drawArrow(x1,y1,x2,y2){
+  r = radius;
+  fill('#ffffff');
+  push();
+  var angle = atan2(y1 - y2, x1 - x2); //gets the angle of the line
+    translate(x2, y2); //translates to the destination vertex
+    rotate(angle-HALF_PI); //rotates the arrow point
+    triangle(-r*0.5, r+r, r*0.5, r+r, 0, r+(-r/2));
+    //rotate((angle-HALF_PI)*(-1));
+    pop();
+    noFill();
 }
 
 //---------------------MAth shit for curws---------------------
