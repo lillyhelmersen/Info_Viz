@@ -50,6 +50,14 @@ canvas {
 }
 .arowButton{
   position: absolute;
+    left: 50%;
+    margin-left: -100px;
+    bottom: 0px;
+    z-index: 9;
+    width: 200px;
+    height: 5%;
+
+  /*position: absolute;
       right: 35%;
       bottom: 0px;
   z-index: 9;
@@ -72,10 +80,9 @@ canvas {
  border-width: 1px;
  //right:15;*/
  position: absolute;
-     left: 5px;
-     bottom: 30px;
-
-
+     left: 18%;
+     bottom: 0;
+     height: 5%;
   width: 20%;
  z-index: 10;
 }

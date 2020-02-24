@@ -41,7 +41,7 @@ var theTime = "To day";
 var numberOfIds = 12;
 var img;
 
-var radius = windowHeight/50;
+var radius;
 
 var slider;
 
@@ -95,8 +95,14 @@ function setArowBottons(){
   //button.position(input.x + input.width, 65);
   buttonP = createButton('Previus Day');
   buttonN = createButton('Next Day');
+  butSize = 90;
+  butDivSize = 200;
+
+  buttonP.size(butSize);
+  buttonN.size(butSize);
+
   buttonP.position(0,0);
-  buttonN.position(100,0);
+  buttonN.position(butDivSize-butSize,0);
 
   setButStyls(buttonP);
   setButStyls(buttonN);
@@ -115,7 +121,8 @@ function setText(newTex){
   textAlign(CENTER, CENTER);
   var tSixe = width / 40;
   textSize(tSixe);
-  text(newTex, width-width/5, tSixe);
+  //text(newTex, width-width/5, tSixe);
+  text(newTex, width/2, height-height*0.1);
   noStroke();
   noFill();
 }
@@ -125,6 +132,7 @@ function setMapp(){
   myMap.overlay(canvas);
   myMap.onChange(function() { drawMarks(forRedraw);});
 }
+
 function filterData(data){
 
   console.log("Start filter IN data");
