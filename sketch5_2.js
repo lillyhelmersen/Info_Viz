@@ -26,6 +26,7 @@ var timeINTab;
 var timeToNextMsINTab;
 var idIndex = [];
 var ids = [];
+var countToNextID = [];
 
 var inSheet = 0;
 var forRedraw = 0;
@@ -42,6 +43,8 @@ var img;
 
 var radius = windowHeight/50;
 
+var slider;
+
 function preload(){
   //table = loadTable(dataCS, 'csv', 'header');
   tableIN = loadTable(data, 'csv', 'header');
@@ -56,7 +59,8 @@ function setup() {
   setMapp();
   filterData(tableIN);
   setRadioButtons();
-  setArowBottons();
+  setArowBottons() ;
+  //setSlider(); //Not implementet becase of time restraints
   setText(theTime);
   //image(img, 0, 0, width/20, height-height/20);
 
@@ -100,6 +104,11 @@ function setArowBottons(){
   buttonP.mousePressed(lastTrip);
   buttonN.mousePressed(nextTrip);
 }
+function setSlider(){
+  /*slider = createSlider(min, max, [value], [step])
+  .size()
+  .parent('radios');*/
+}
 function setText(newTex){
   stroke(255);
   fill(255);
@@ -136,7 +145,6 @@ function filterData(data){
   */
 
 }
-
 function setIdIndex(userIdTab){
   //idIndex = [];
   var tempCount = 1;
@@ -149,10 +157,14 @@ function setIdIndex(userIdTab){
       ids[tempCount] = userIdTab[i+1];
       //console.log("userIdTab["+(i+1)+"]: " + userIdTab[i+1]);
       //console.log(" - idIndex["+tempCount+"]: " + i+1);
+      if(ifNextTrip(timeToNextMsINTab[i])){
+        countToNextID[tempCount] += 1;
+      }
       tempCount++;
     }
   }
 }
+
 
 function printDobleArray(a){
   if(a == null){
