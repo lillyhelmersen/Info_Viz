@@ -8,6 +8,8 @@ var createdAtINTab;
 var latINTab;
 var longINTab;
 
+var countER = 0;
+
 var tableIN;
 
 var theTime = "To day";
@@ -32,47 +34,6 @@ function draw() {
 
 }
 //-------setup----------
-function setRadioButtons(){
-  console.log("Trying to make radio butons");
-  radio = createRadio('radios');
-  radio.style('color', '#ffffff');
-  for (i = 0; i < numberOfIds; ++i){
-    var j = i+1;
-    var tempName = 'User: ' + j + '\n';
-    var butName = tempName;
-    radio.option(butName);
-  }
-
-  //radio.option('white');
-  radio.style('width', '90px');
-  radio.parent('radios');
-}
-function setArowBottons(){
-  //button.position(input.x + input.width, 65);
-  buttonP = createButton('Previus Day');
-  buttonN = createButton('Next Day');
-  buttonP.position(0,0);
-  buttonN.position(100,0);
-
-  setButStyls(buttonP);
-  setButStyls(buttonN);
-
-  buttonP.mousePressed(nextTrip);
-  buttonN.mousePressed(nextTrip);
-}
-function setText(){
-  stroke(255);
-  fill(255);
-  textAlign(CENTER, CENTER);
-  var tSixe = width / 40;
-  textSize(tSixe);
-  text(theTime, width-width/10, tSixe);
-}
-function setMapp(){
-  canvas = createCanvas(windowWidth, windowHeight);
-  myMap = mappa.tileMap(options);
-  myMap.overlay(canvas);
-}
 function setPrintTable(){
   printTable = new p5.Table();
 
@@ -336,6 +297,9 @@ function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
     ;
   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
   var d = R * c; // Distance in km
+  /*if(countER < 20){
+    console.log("Distans: " d);
+  }*/
   return d;
 }
 
