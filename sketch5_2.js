@@ -49,7 +49,7 @@ var slider;
 function preload(){
   //table = loadTable(dataCS, 'csv', 'header');
   tableIN = loadTable(data, 'csv', 'header');
-  img = loadImage('all.svg');//loadImage('speeds.PNG');
+  img = loadImage('all-01.png');//loadImage('speeds.PNG');
 }
 
 function setup() {
@@ -72,7 +72,11 @@ function setup() {
   //printToTable();
 }
 function draw() {
-
+  //width-(img.width+20), height-img.height
+  /*imgW = img.width;
+  imgH = img.height;
+  console.log("w: " + imgW + " H: " + imgH);
+  image(img, 0,0,imgW*0.2,imgH*0.2);*/
 }
 //-------setup----------
 function setDropDownMenu(){
@@ -443,24 +447,24 @@ function lineStyle(i){
   var h = timeToNextMsINTab[i]/parseFloat(60*60*1000);
   //console.log("Houers: " + h);
   var km_h = distansINTab[i]/parseFloat(h);
-  console.log("km/t: " + km_h);
+  //console.log("km/t: " + km_h);
 
   strokeWeight(2.5);
 
-  if(h == 0){
-    stroke('#FF0900');
+  if(km_h > 1238){
+    stroke('#F23005');
   } else if(km_h > 200){
-    stroke('#FF6900');
+    stroke('#FF7E00');
   }  else if(km_h > 80){
-    stroke('#FEE300');
+    stroke('#EAF205');
   } else if(km_h > 25){
-    stroke('#cfff77');
+    stroke('#9DF21D');
   } else if(km_h > 5){
-    stroke('#00FFF3');
-  }  else if(km_h > 0){
-    stroke('#0BFF01');
+    stroke('#00EEFF');
+  }  else if(km_h >= 0.5){
+    stroke('#514BF2');
   } else {
-    stroke('#0000ff');
+    stroke('#EE05F2');
   }
 
 
