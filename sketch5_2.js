@@ -32,6 +32,7 @@ var inSheet = 0;
 var forRedraw = 0;
 var latSelected = 1;
 var one_day=1000*60*60*24;
+var twentyForH=1000*60*60;
 
 var tableIN;
 var maxRow;
@@ -48,7 +49,7 @@ var slider;
 function preload(){
   //table = loadTable(dataCS, 'csv', 'header');
   tableIN = loadTable(data, 'csv', 'header');
-  img = loadImage('speeds.PNG');
+  img = loadImage('all.svg');//loadImage('speeds.PNG');
 }
 
 function setup() {
@@ -223,6 +224,7 @@ function daysBetween(date1,date2) {
   var difference_ms = date2_ms - date1_ms;
 
   // Convert back to days and return
+
   return difference_ms;//.round(difference_ms/one_day);
 }
 //Km calcolation : https://stackoverflow.com/questions/18883601/function-to-calculate-distance-between-two-coordinates
@@ -323,11 +325,17 @@ function lastTrip(){
 
 }
 function ifNextTrip(timeBetween){
-  timeBetween = Math.round(timeBetween/one_day);
+  timeBetween = timeBetween/parseFloat(twentyForH);
+  //console.log("The houers : " + timeBetween);
   //console.log("day? : " + timeBetween);
-  if(timeBetween >= 1){
+  if(timeBetween >= 24){
     return true;
   }
+  /*timeBetween = Math.round(timeBetween/one_day);
+  console.log("day? : " + timeBetween);
+  if(timeBetween >= 1){
+    return true;
+  }*/
 }
 function setNewInSheet(){
   var dropDownSelected = dropDown.value()-1;
@@ -432,9 +440,10 @@ function pointStyle(){
 function lineStyle(i){
   //caclate km/t
   //distansINTab;
-  var h = timeToNextMsINTab[i]/(60*60*1000);
-  var km_h = distansINTab[i]/h;
-  //console.log("km/t: " + km_h);
+  var h = timeToNextMsINTab[i]/parseFloat(60*60*1000);
+  //console.log("Houers: " + h);
+  var km_h = distansINTab[i]/parseFloat(h);
+  console.log("km/t: " + km_h);
 
   strokeWeight(2.5);
 
@@ -446,10 +455,10 @@ function lineStyle(i){
     stroke('#FEE300');
   } else if(km_h > 25){
     stroke('#cfff77');
-    stroke('#00FFF3');
   } else if(km_h > 5){
-    stroke('#0BFF01');
+    stroke('#00FFF3');
   }  else if(km_h > 0){
+    stroke('#0BFF01');
   } else {
     stroke('#0000ff');
   }
