@@ -58,7 +58,7 @@ function setup() {
   //setPrintTable();
   setMapp();
   filterData(tableIN);
-  setRadioButtons();
+  setDropDownMenu();
   setArowBottons() ;
   //setSlider(); //Not implementet becase of time restraints
   setText(theTime);
@@ -74,22 +74,22 @@ function draw() {
 
 }
 //-------setup----------
-function setRadioButtons(){
-  console.log("Trying to make radio butons");
-  radio = createSelect('radios');
-  radio.style('color', '#000000');
+function setDropDownMenu(){
+  console.log("Trying to make dropDown butons");
+  dropDown = createSelect('dropDowns');
+  dropDown.style('color', '#000000');
   for (i = 0; i < numberOfIds; ++i){
     var j = i+1;
     var id = ids[i];
     var tempName = '' + j + '. User: ' + id + '';
     var butName = tempName;
-    radio.option(butName, j);
-    radio.changed(nextTrip);
+    dropDown.option(butName, j);
+    dropDown.changed(nextTrip);
   }
 
-  //radio.option('white');
-  radio.style('width','135px');
-  radio.parent('radios');
+  //dropDown.option('white');
+  dropDown.style('width','135px');
+  dropDown.parent('dropDowns');
 }
 function setArowBottons(){
   //button.position(input.x + input.width, 65);
@@ -113,7 +113,7 @@ function setArowBottons(){
 function setSlider(){
   /*slider = createSlider(min, max, [value], [step])
   .size()
-  .parent('radios');*/
+  .parent('dropDowns');*/
 }
 function setText(newTex){
   stroke(255);
@@ -290,28 +290,28 @@ function drawMarks(startIndex){
 }
 function nextTrip(){
   //console.log("PresedNext");
-  var radioSelected = radio.value();
-  //console.log(" - Radiao: " + radioSelected);
+  var dropDownSelected = dropDown.value();
+  //console.log(" - Radiao: " + dropDownSelected);
   //console.log(" - latSelected: " + latSelected);
   //That there is a selected person
   if(latSelected != 0){
 
-    if(latSelected != radioSelected){
+    if(latSelected != dropDownSelected){
       setNewInSheet();
     }
     drawMarks(inSheet);
   } else {
     noSelection();
   }
-  latSelected = radioSelected;
+  latSelected = dropDownSelected;
   //setText(dateToDay(timeINTab[inSheet]));//new Date(timeINTab[inSheet]).getDate()
 }
 function lastTrip(){
-  var radioSelected = radio.value();
+  var dropDownSelected = dropDown.value();
   //That there is a selected person
   if(latSelected != 0){
 
-    if(latSelected != radioSelected){
+    if(latSelected != dropDownSelected){
       setNewInSheet();
     }
     setPreviusInSheet();
@@ -319,7 +319,7 @@ function lastTrip(){
   } else {
     noSelection();
   }
-  latSelected = radioSelected;
+  latSelected = dropDownSelected;
 
 }
 function ifNextTrip(timeBetween){
@@ -330,10 +330,10 @@ function ifNextTrip(timeBetween){
   }
 }
 function setNewInSheet(){
-  var radioSelected = radio.value()-1;
-  console.log("radioSelected: " + radioSelected);
-  console.log("new In sheet: " + idIndex[radioSelected]);
-  inSheet = idIndex[radioSelected];
+  var dropDownSelected = dropDown.value()-1;
+  console.log("dropDownSelected: " + dropDownSelected);
+  console.log("new In sheet: " + idIndex[dropDownSelected]);
+  inSheet = idIndex[dropDownSelected];
 }
 function setPreviusInSheet(){
   var bool = true;
