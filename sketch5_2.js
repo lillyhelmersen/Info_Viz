@@ -127,7 +127,19 @@ function setText(newTex){
   var tSixe = width / 40;
   textSize(tSixe);
   //text(newTex, width-width/5, tSixe);
-  text(newTex, width/2, height-height*0.1);
+  text(newTex, width/2, height-height*0.15);
+  noStroke();
+  noFill();
+}
+function drawNumMark(num){
+  stroke(255);
+  fill(255);
+  textAlign(CENTER, CENTER);
+  var tSixe = width / 60;
+  textSize(tSixe);
+  //text(newTex, width-width/5, tSixe);
+  var t = "Pictur count: " + num;
+  text(t, width/2, height-height*0.1);
   noStroke();
   noFill();
 }
@@ -177,7 +189,6 @@ function setIdIndex(userIdTab){
     }
   }
 }
-
 
 function printDobleArray(a){
   if(a == null){
@@ -251,6 +262,7 @@ function deg2rad(deg) {
 
 //----------Drawing---------------------
 function drawMarks(startIndex){
+  var numMakrs = 0;
   forRedraw = startIndex;
   //console.log("startIndex: "  + startIndex);
   clear();
@@ -275,9 +287,10 @@ function drawMarks(startIndex){
 
     drawPoint(x1,y1);
     drawLine(x1,y1,x2,y2,i);
+    numMakrs++;
     //drawArrow(x1,y1,x2,y2);
     //difference_ms;//.round(difference_ms/one_day);
-    if(ifNextTrip(timeToNextMsINTab[i])){
+    if(ifNextTrip(timeToNextMsINTab[i+1])){
       bool = false;
     }
     i++;
@@ -290,8 +303,10 @@ function drawMarks(startIndex){
   x1 = position1.x;
   y1 = position1.y;
   drawPoint(x1,y1);
+  numMakrs++;
   //For next trip
   inSheet = i;
+  drawNumMark(numMakrs);
   //console.log("inSheet: " + inSheet);
 }
 function nextTrip(){
@@ -353,7 +368,7 @@ function setPreviusInSheet(){
   var backCount = 0;
   while(bool){
     //inSheet
-    if(ifNextTrip(timeToNextMsINTab[tempinSheet])){
+    if(ifNextTrip(timeToNextMsINTab[tempinSheet-1])){
       backCount++;
     }
     if(backCount == 2){
@@ -472,7 +487,8 @@ function lineStyle(i){
 
 function dateToDay(time){
   var d = new Date(timeINTab[inSheet]);
-  var s = "" + d.getDate()+"." + d.getMonth() +"."+ d.getFullYear();
+  var month = d.getMonth() +1;
+  var s = "" + d.getDate()+"." + month +"."+ d.getFullYear();
   return s;
 }
 ///Old stuff----------------------
