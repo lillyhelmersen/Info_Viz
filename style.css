@@ -1,7 +1,7 @@
 html, body {
   margin: 0;
   padding: 0;
-  background-color: #101114;
+  background-color: #192634;/*#101114;*/
   text-align: center;
 }
 p,h1{
@@ -18,12 +18,13 @@ canvas {
 }
 #mapLink a{
   text-decoration: none;
-  background-color: #235283;
+  background-color: #ffffff;
+  color: #192634;
   border-radius: 10px;
   padding: 15px;
 }
 #mapLink a:visited {
-  color: #101114;
+  color: #192634;
 }
 #mapLink{
   font-family: 'Arial';
