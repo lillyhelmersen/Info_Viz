@@ -26,10 +26,11 @@ var timeINTab;
 var timeToNextMsINTab;
 var idIndex = [];
 var ids = [];
+var countToNextID = [];
 
 var inSheet = 0;
 var forRedraw = 0;
-var latSelected = 0;
+var latSelected = 1;
 var one_day=1000*60*60*24;
 
 var tableIN;
@@ -39,6 +40,10 @@ var theTime = "To day";
 
 var numberOfIds = 12;
 var img;
+
+var radius;
+
+var slider;
 
 function preload(){
   //table = loadTable(dataCS, 'csv', 'header');
@@ -53,8 +58,9 @@ function setup() {
   //setPrintTable();
   setMapp();
   filterData(tableIN);
-  setRadioButtons();
-  setArowBottons();
+  setDropDownMenu();
+  setArowBottons() ;
+  //setSlider(); //Not implementet becase of time restraints
   setText(theTime);
   //image(img, 0, 0, width/20, height-height/20);
 
@@ -68,28 +74,35 @@ function draw() {
 
 }
 //-------setup----------
-function setRadioButtons(){
-  console.log("Trying to make radio butons");
-  radio = createRadio('radios');
-  radio.style('color', '#ffffff');
+function setDropDownMenu(){
+  console.log("Trying to make dropDown butons");
+  dropDown = createSelect('dropDowns');
+  dropDown.style('color', '#000000');
   for (i = 0; i < numberOfIds; ++i){
     var j = i+1;
     var id = ids[i];
     var tempName = '' + j + '. User: ' + id + '';
     var butName = tempName;
-    radio.option(butName, j);
+    dropDown.option(butName, j);
+    dropDown.changed(nextTrip);
   }
 
-  //radio.option('white');
-  radio.style('width','135px');
-  radio.parent('radios');
+  //dropDown.option('white');
+  dropDown.style('width','135px');
+  dropDown.parent('dropDowns');
 }
 function setArowBottons(){
   //button.position(input.x + input.width, 65);
   buttonP = createButton('Previus Day');
   buttonN = createButton('Next Day');
+  butSize = 90;
+  butDivSize = 200;
+
+  buttonP.size(butSize);
+  buttonN.size(butSize);
+
   buttonP.position(0,0);
-  buttonN.position(100,0);
+  buttonN.position(butDivSize-butSize,0);
 
   setButStyls(buttonP);
   setButStyls(buttonN);
@@ -97,13 +110,19 @@ function setArowBottons(){
   buttonP.mousePressed(lastTrip);
   buttonN.mousePressed(nextTrip);
 }
+function setSlider(){
+  /*slider = createSlider(min, max, [value], [step])
+  .size()
+  .parent('dropDowns');*/
+}
 function setText(newTex){
   stroke(255);
   fill(255);
   textAlign(CENTER, CENTER);
   var tSixe = width / 40;
   textSize(tSixe);
-  text(newTex, width-width/5, tSixe);
+  //text(newTex, width-width/5, tSixe);
+  text(newTex, width/2, height-height*0.1);
   noStroke();
   noFill();
 }
@@ -113,6 +132,7 @@ function setMapp(){
   myMap.overlay(canvas);
   myMap.onChange(function() { drawMarks(forRedraw);});
 }
+
 function filterData(data){
 
   console.log("Start filter IN data");
@@ -133,7 +153,6 @@ function filterData(data){
   */
 
 }
-
 function setIdIndex(userIdTab){
   //idIndex = [];
   var tempCount = 1;
@@ -146,10 +165,14 @@ function setIdIndex(userIdTab){
       ids[tempCount] = userIdTab[i+1];
       //console.log("userIdTab["+(i+1)+"]: " + userIdTab[i+1]);
       //console.log(" - idIndex["+tempCount+"]: " + i+1);
+      if(ifNextTrip(timeToNextMsINTab[i])){
+        countToNextID[tempCount] += 1;
+      }
       tempCount++;
     }
   }
 }
+
 
 function printDobleArray(a){
   if(a == null){
@@ -246,6 +269,7 @@ function drawMarks(startIndex){
 
     drawPoint(x1,y1);
     drawLine(x1,y1,x2,y2,i);
+    //drawArrow(x1,y1,x2,y2);
     //difference_ms;//.round(difference_ms/one_day);
     if(ifNextTrip(timeToNextMsINTab[i])){
       bool = false;
@@ -266,28 +290,28 @@ function drawMarks(startIndex){
 }
 function nextTrip(){
   //console.log("PresedNext");
-  var radioSelected = radio.value();
-  //console.log(" - Radiao: " + radioSelected);
+  var dropDownSelected = dropDown.value();
+  //console.log(" - Radiao: " + dropDownSelected);
   //console.log(" - latSelected: " + latSelected);
   //That there is a selected person
   if(latSelected != 0){
 
-    if(latSelected != radioSelected){
+    if(latSelected != dropDownSelected){
       setNewInSheet();
     }
     drawMarks(inSheet);
   } else {
     noSelection();
   }
-  latSelected = radioSelected;
+  latSelected = dropDownSelected;
   //setText(dateToDay(timeINTab[inSheet]));//new Date(timeINTab[inSheet]).getDate()
 }
 function lastTrip(){
-  var radioSelected = radio.value();
+  var dropDownSelected = dropDown.value();
   //That there is a selected person
   if(latSelected != 0){
 
-    if(latSelected != radioSelected){
+    if(latSelected != dropDownSelected){
       setNewInSheet();
     }
     setPreviusInSheet();
@@ -295,7 +319,7 @@ function lastTrip(){
   } else {
     noSelection();
   }
-  latSelected = radioSelected;
+  latSelected = dropDownSelected;
 
 }
 function ifNextTrip(timeBetween){
@@ -306,10 +330,10 @@ function ifNextTrip(timeBetween){
   }
 }
 function setNewInSheet(){
-  var radioSelected = radio.value()-1;
-  console.log("radioSelected: " + radioSelected);
-  console.log("new In sheet: " + idIndex[radioSelected]);
-  inSheet = idIndex[radioSelected];
+  var dropDownSelected = dropDown.value()-1;
+  console.log("dropDownSelected: " + dropDownSelected);
+  console.log("new In sheet: " + idIndex[dropDownSelected]);
+  inSheet = idIndex[dropDownSelected];
 }
 function setPreviusInSheet(){
   var bool = true;
@@ -337,10 +361,10 @@ function noSelection(){
 
 function  drawPoint(x,y){
   var zoom = myMap.zoom();
-  r = windowHeight/50;//!!!!!!!!!!!!!!SOMTHING WITH ZOOL
+  radius = windowHeight/50;//!!!!!!!!!!!!!!SOMTHING WITH ZOOL
   //r = (zoom+1)*20-(zoom+1)*50;
   pointStyle();
-  ellipse(x,y,r,r);
+  ellipse(x,y,radius,radius);
   noFill();
   noStroke();
 }
@@ -350,6 +374,19 @@ function  drawLine(x1,y1,x2,y2,i){
   line(x1,y1,x2,y2);
   noFill();
   noStroke();
+  strokeWeight(0);
+}
+function  drawArrow(x1,y1,x2,y2){
+  r = radius;
+  fill('#ffffff');
+  push();
+  var angle = atan2(y1 - y2, x1 - x2); //gets the angle of the line
+    translate(x2, y2); //translates to the destination vertex
+    rotate(angle-HALF_PI); //rotates the arrow point
+    triangle(-r*0.5, r+r, r*0.5, r+r, 0, r+(-r/2));
+    //rotate((angle-HALF_PI)*(-1));
+    pop();
+    noFill();
 }
 
 //---------------------MAth shit for curws---------------------
@@ -398,6 +435,9 @@ function lineStyle(i){
   var h = timeToNextMsINTab[i]/(60*60*1000);
   var km_h = distansINTab[i]/h;
   //console.log("km/t: " + km_h);
+
+  strokeWeight(2.5);
+
   if(h == 0){
     stroke('#FF0900');
   } else if(km_h > 200){
@@ -406,13 +446,14 @@ function lineStyle(i){
     stroke('#FEE300');
   } else if(km_h > 25){
     stroke('#cfff77');
+    stroke('#00FFF3');
   } else if(km_h > 5){
     stroke('#0BFF01');
   }  else if(km_h > 0){
-    stroke('#00FFF3');
   } else {
     stroke('#0000ff');
   }
+
 
 }
 
